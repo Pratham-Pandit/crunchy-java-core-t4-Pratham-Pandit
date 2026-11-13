@@ -63,18 +63,28 @@ The project supports generating 100,000 student records for performance testing.
 
 ## Benchmark Results
 
-Both implementations were tested using the same dataset sizes.
+Both implementations were tested using the same generated datasets.
 
 | Records | ArrayList (ns/lookup) | HashMap (ns/lookup) |
 |---:|---:|---:|
-| 10 | 57.63 | 21.47 |
-| 100,000 | 2,043,445.00 | 121.20 |
+| 10 | 47.28 | 10.58 |
+| 100,000 | 921,960.90 | 23.60 |
 
-The benchmark uses three JVM warm-up rounds and five measurement rounds. The median lookup time is reported.
+### Benchmark Methodology
 
-HashMap performed significantly faster for the 100,000-record lookup workload.
+- Three JVM warm-up rounds.
+- Five measurement rounds.
+- Median lookup time reported.
+- Alternating measurement order.
+- Same dataset and lookup target for both implementations.
+- The last student ID is searched in each dataset.
 
-See `RESULTS.md` for detailed results and `BASELINE.md` for the initial ArrayList benchmark.
+HashMap demonstrated significantly lower lookup time in this workload, particularly with 100,000 records.
+
+These measurements are specific to the tested environment and should not be interpreted as a universal performance guarantee.
+
+See `RESULTS.md` for detailed measurements and `DECISIONS.md` for the final data structure decision.
+
 
 ## Testing
 

@@ -2,10 +2,7 @@
 
 ## 1. Objective
 
-The objective of this benchmark is to compare two data structures for searching students by their ID:
-
-- **ArrayList:** Uses linear search to find a student.
-- **HashMap:** Uses the student ID as a key for direct lookup.
+The objective is to compare ArrayList and HashMap for searching student records by ID.
 
 Both implementations use the same generated student records.
 
@@ -20,28 +17,31 @@ Both implementations use the same generated student records.
 | Measurement Rounds | 5 |
 | Measurement Method | Median lookup time |
 | Dataset Sizes | 10 and 100,000 |
+| Lookup Target | Last student ID |
 
-## 3. Benchmark Results
-
-The following results were obtained by searching for the last student ID in each dataset.
+## 3. Final Benchmark Results
 
 | Number of Records | ArrayList (ns/lookup) | HashMap (ns/lookup) |
 |---:|---:|---:|
-| 10 | 57.63 | 21.47 |
-| 100,000 | 2,043,445.00 | 121.20 |
+| 10 | 47.28 | 10.58 |
+| 100,000 | 921,960.90 | 23.60 |
 
 ## 4. Analysis
 
-For 10 records, HashMap performed faster than ArrayList in this benchmark.
+For both dataset sizes, HashMap demonstrated lower lookup time in this benchmark.
 
-For 100,000 records, HashMap performed significantly faster. ArrayList must examine records one by one, whereas HashMap provides average constant-time lookup.
+For 100,000 records, the measured ArrayList lookup took approximately 39,066 times longer than HashMap.
 
-The measured ArrayList lookup time was approximately 16,860 times higher than the HashMap lookup time for the 100,000-record dataset.
+ArrayList uses linear search, with O(n) time complexity. HashMap provides average O(1) lookup time.
+
+The benchmark searches for the last student in the dataset, representing the worst-case search position for ArrayList.
+
+The measurement order was alternated across five rounds to reduce consistent first-versus-second measurement bias.
 
 ## 5. Conclusion
 
-The benchmark demonstrates that HashMap is a better choice for this student lookup feature when working with a large number of records.
+HashMap is selected for the student ID lookup feature because it demonstrated significantly better performance for this workload, particularly with 100,000 records.
 
-ArrayList is still useful for smaller collections and situations where sequential access is important.
+ArrayList remains useful for sequential access, maintaining an ordered collection, and situations where key-based lookup is not the primary requirement.
 
-The results are specific to this benchmark environment and workload. They should not be interpreted as a guarantee that HashMap is always faster in every situation.
+These results are specific to the tested environment and workload and do not establish that HashMap is universally faster.

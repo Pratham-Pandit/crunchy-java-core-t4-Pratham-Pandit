@@ -2,41 +2,41 @@
 
 ## 1. Selected Data Structure: HashMap
 
-For the Student Lookup feature, I selected **HashMap** as the final data structure.
+For the Student Lookup feature, HashMap is selected as the final data structure.
 
-HashMap stores student records using their student ID as the key, allowing efficient retrieval without checking every record individually.
+It stores student records using their IDs as keys, allowing efficient retrieval.
 
-## 2. Reason for Selection
+## 2. Measured Reason
 
-The benchmark results showed that HashMap performed significantly better for student lookup.
+The final benchmark produced the following results:
 
-| Number of Records | ArrayList | HashMap |
+| Number of Records | ArrayList (ns/lookup) | HashMap (ns/lookup) |
 |---:|---:|---:|
-| 10 | 57.63 ns | 21.47 ns |
-| 100,000 | 2,043,445 ns | 121.20 ns |
+| 10 | 47.28 | 10.58 |
+| 100,000 | 921,960.90 | 23.60 |
 
-For 100,000 records, HashMap was approximately 16,860 times faster in the measured workload.
+For the 100,000-record dataset, HashMap demonstrated approximately 39,066 times faster lookup in the measured workload.
 
-The main reason is the difference in time complexity:
+The time complexities are:
 
-- **ArrayList:** O(n) for linear search.
-- **HashMap:** O(1) average time for lookup.
+- ArrayList: O(n) for linear search.
+- HashMap: O(1) average lookup time.
 
-Therefore, HashMap is more suitable for this feature when the number of student records becomes large.
+Therefore, HashMap is selected for this student ID lookup feature.
 
 ## 3. When ArrayList Would Be Preferred
 
 ArrayList would be preferable when:
 
-- The application mainly needs sequential access to records.
+- Sequential access to student records is frequently required.
 - Maintaining insertion order is important.
-- The collection is small and simple to manage.
-- Frequent iteration is more important than searching by ID.
+- The application frequently iterates through the entire collection.
+- Key-based searching is not the main requirement.
 
-ArrayList is also simpler when key-based lookup is not required.
+ArrayList also provides a simpler structure when direct key-based lookup is unnecessary.
 
-## 4. Final Conclusion
+## 4. Final Decision
 
-Based on the benchmark measurements and time complexity analysis, HashMap is selected for the Student Lookup feature.
+HashMap is selected because it provides substantially better measured lookup performance for the tested workload, especially with 100,000 records.
 
-However, the choice of data structure depends on the application's requirements. HashMap is not universally better than ArrayList for every use case.
+However, data structure selection depends on application requirements. HashMap is not universally better than ArrayList.
