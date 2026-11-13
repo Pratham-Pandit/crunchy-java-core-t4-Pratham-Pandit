@@ -56,13 +56,25 @@ public class Benchmark {
         double[] hashMapTimes = new double[measurementRounds];
 
         // Perform multiple measurement rounds
+        // Alternate the measurement order for fairness
         for (int i = 0; i < measurementRounds; i++) {
 
-            arrayListTimes[i]
-                    = measure(arrayList::searchStudent, searchId, repetitions);
+            if (i % 2 == 0) {
 
-            hashMapTimes[i]
-                    = measure(hashMap::searchStudent, searchId, repetitions);
+                arrayListTimes[i]
+                        = measure(arrayList::searchStudent, searchId, repetitions);
+
+                hashMapTimes[i]
+                        = measure(hashMap::searchStudent, searchId, repetitions);
+
+            } else {
+
+                hashMapTimes[i]
+                        = measure(hashMap::searchStudent, searchId, repetitions);
+
+                arrayListTimes[i]
+                        = measure(arrayList::searchStudent, searchId, repetitions);
+            }
         }
 
         double arrayListMedian = median(arrayListTimes);

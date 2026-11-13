@@ -9,14 +9,30 @@ public class HashMapStudentLookup {
 
     // Adds a student to the HashMap
     public void addStudent(Student student) {
-        String id = student.getId().toLowerCase(Locale.ROOT);
-        students.putIfAbsent(id, student);
+
+        if (student == null) {
+            throw new IllegalArgumentException("Student cannot be null");
+        }
+
+        String id = student.getId();
+
+        if (id == null || id.isBlank()) {
+            throw new IllegalArgumentException("Student ID cannot be null or blank");
+        }
+
+        String key = id.toLowerCase(Locale.ROOT);
+
+        if (students.containsKey(key)) {
+            throw new IllegalArgumentException("Duplicate student ID: " + id);
+        }
+
+        students.put(key, student);
     }
 
     // Searches for a student using their ID
     public Student searchStudent(String id) {
 
-        if (id == null) {
+        if (id == null || id.isBlank()) {
             return null;
         }
 
